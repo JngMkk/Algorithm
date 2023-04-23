@@ -4,7 +4,7 @@
 
 Merge Sort는 일정하게 $O(n \times logn)$의 안정적인 성능을 보이며, 무엇보다 안정 정렬(Stable Sort)라는 점에서 많이 선호되는 편임.
 
----
+<br/>
 
 - Python
   
@@ -32,7 +32,7 @@ Merge Sort는 일정하게 $O(n \times logn)$의 안정적인 성능을 보이�
 
   Go에서는 Tim Sort가 Merge Sort를 기반으로 하기 때문에 적어도 O($1 \times n \over 2$)의 추가 메모리 공간이 필요하다는 공간 복잡도를 이유로 들어 도입을 거절하기도 함.
 
----
+<br/>
 
 - 정렬 알고리즘별 시간 복잡도
 
@@ -45,7 +45,7 @@ Merge Sort는 일정하게 $O(n \times logn)$의 안정적인 성능을 보이�
   | Heap Sort      | Ω(n log n) | Θ(n log n) | O(n log n) | O(1)            | x    |
   | Tim Sort       | Ω(n)       | Θ(n log n) | O(n log n) | O(1/2n) -> O(n) | o    |
   
-  ---
+  <br/>
   
   시간 복잡도가 $O(n \times logn)$이라는 말은 실제 동작 시간은 $C \times n \times logn + \alpha$라는 의미.
   
@@ -61,7 +61,7 @@ Merge Sort는 일정하게 $O(n \times logn)$의 안정적인 성능을 보이�
     
     메모리를 연속으로 읽는 작업은 캐시 메모리에서 읽어오기에 빠른 반면, 무작위로 읽는 작업은 메인 메모리에서 읽어오기에 속도의 차이가 있음.
   
-  ---
+  <br/>
   
   - Heap Sort
   
@@ -96,16 +96,18 @@ Merge Sort는 일정하게 $O(n \times logn)$의 안정적인 성능을 보이�
     이론적으로 어떠한 정렬 알고리즘도 한 번 이상 비교하게 되면 $\Omega(n \times logn)$보다 빨라질 수 없음.
   
     하지만 Tim Sort는 이미 정렬되어 있는 경우 비교를 건너뛰기 때문에 $\Omega(n)$까지 가능함.
-    
-    \nInsertion Sort는 인접한 메모리와의 비교를 반복하기에 참조 지역성의 원리를 매우 잘 만족함.
+
+    <br/>
+    Insertion Sort는 인접한 메모리와의 비교를 반복하기에 참조 지역성의 원리를 매우 잘 만족함.
   
     이에 따라 Insertion sort의 상수 C를 $C_i$라 하고, $O(n \times logn)$ 정렬 알고리즘 중 C 값이 가장 작은 Quick Sort의 상수 C를 $C_j$라 할 때,
   
     작은 n에 대하여 $C_i \times n^2 < C_j \times n \times logn$이 성립함. 즉 작은 n에 대하여 Insertion Sort가 더 빠르다는 것임.
   
     이를 이용해 전체를 작은 덩어리로 잘라 각각의 덩어리를 Insertion Sort로 정렬한 뒤 병합하면 좀 더 빠를 것이란 생각이 기본 아이디어.
-  
-    \nTim Sort에서 사용하는 Insertion Sort는 Binary Insertion Sort임.
+
+    <br/>
+    Tim Sort에서 사용하는 Insertion Sort는 Binary Insertion Sort임.
   
     삽입해야 할 위치를 찾을 때까지 비교하는 대신, 앞의 원소들은 모두 정렬되어 있다는 전제를 기반으로 이분 탐색을 진행하여 위치를 찾음.
   
