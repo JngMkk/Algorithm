@@ -117,7 +117,7 @@ Merge Sort는 일정하게 $O(n \times logn)$의 안정적인 성능을 보이�
   
     일반적인 Insertion sort와 동일하지만 그 위치에 삽입하고 나머지 원소를 시프트하는 연산은 빠르기 때문에 훨씬 효율적임.
   
-    
+    xptmxm
   
     
   
