@@ -3,3 +3,5 @@ ignore =
     E501 # line-length
     W503
     E203 # white-space before :
+
+max-line-length = 300
