@@ -47,3 +47,22 @@ def solution(priorities, location):
         q.append((p, i))
 
     return res.index(location) + 1
+
+
+def solution(priorities, location):
+    n_of_processes = len(priorities)  # process 개수
+    ordering_of_executed = 0  # 실행 순서
+    cursor = 0  # 커서
+    while True:
+        loc = cursor % n_of_processes
+
+        if max(priorities) == priorities[loc]:  # 가장 큰 우선순위면
+            ordering_of_executed += 1  # 순서 기록
+            priorities[loc] = 0  # 실행 했다는 의미로 0 기록 (우선순위 조건: 1이상)
+
+            if loc == location:  # 주어진 프로세스로 순서가 돌아왔다면
+                break
+
+        cursor += 1
+
+    return ordering_of_executed
