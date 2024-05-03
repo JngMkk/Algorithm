@@ -1,64 +1,38 @@
-"""
-숫자 카드 나누기
-문제 설명
-철수와 영희는 선생님으로부터 숫자가 하나씩 적힌 카드들을 절반씩 나눠서 가진 후, 다음 두 조건 중 하나를 만족하는 가장 큰 양의 정수 a의 값을 구하려고 합니다.
+def solution(arrayA, arrayB):
+    def gcd(a, b):
+        if a % b == 0:
+            return b
+        return gcd(b, a % b)
 
-철수가 가진 카드들에 적힌 모든 숫자를 나눌 수 있고 영희가 가진 카드들에 적힌 모든 숫자들 중 하나도 나눌 수 없는 양의 정수 a
-영희가 가진 카드들에 적힌 모든 숫자를 나눌 수 있고, 철수가 가진 카드들에 적힌 모든 숫자들 중 하나도 나눌 수 없는 양의 정수 a
-예를 들어, 카드들에 10, 5, 20, 17이 적혀 있는 경우에 대해 생각해 봅시다. 만약, 철수가 [10, 17]이 적힌 카드를 갖고, 영희가 [5, 20]이 적힌 카드를 갖는다면 두 조건 중 하나를 만족하는 양의 정수 a는 존재하지 않습니다. 하지만, 철수가 [10, 20]이 적힌 카드를 갖고, 영희가 [5, 17]이 적힌 카드를 갖는다면, 철수가 가진 카드들의 숫자는 모두 10으로 나눌 수 있고, 영희가 가진 카드들의 숫자는 모두 10으로 나눌 수 없습니다. 따라서 철수와 영희는 각각 [10, 20]이 적힌 카드, [5, 17]이 적힌 카드로 나눠 가졌다면 조건에 해당하는 양의 정수 a는 10이 됩니다.
+    def check_array(_gcd, array):
+        if _gcd != 1:
+            flag = 1
+            for elem in array:
+                if elem >= _gcd and elem % _gcd == 0:
+                    flag = 0
+                    break
+            if flag:
+                return _gcd
+        return 0
 
-철수가 가진 카드에 적힌 숫자들을 나타내는 정수 배열 arrayA와 영희가 가진 카드에 적힌 숫자들을 나타내는 정수 배열 arrayB가 주어졌을 때, 주어진 조건을 만족하는 가장 큰 양의 정수 a를 return하도록 solution 함수를 완성해 주세요. 만약, 조건을 만족하는 a가 없다면, 0을 return 해 주세요.
+    n = len(arrayA)
+    gcd_a = arrayA[0]
+    gcd_b = arrayB[0]
+    for i in range(1, n):
+        gcd_a = gcd(gcd_a, arrayA[i])
+        gcd_b = gcd(gcd_b, arrayB[i])
 
-제한사항
-제한사항
-
-1 ≤ arrayA의 길이 = arrayB의 길이 ≤ 500,000
-1 ≤ arrayA의 원소, arrayB의 원소 ≤ 100,000,000
-arrayA와 arrayB에는 중복된 원소가 있을 수 있습니다.
-입출력 예
-arrayA	arrayB	result
-[10, 17]	[5, 20]	0
-[10, 20]	[5, 17]	10
-[14, 35, 119]	[18, 30, 102]	7
-입출력 예 설명
-입출력 예 #1
-
-문제 예시와 같습니다.
-입출력 예 #2
-
-문제 예시와 같습니다.
-입출력 예 #3
-
-철수가 가진 카드에 적힌 숫자들은 모두 3으로 나눌 수 없고, 영희가 가진 카드에 적힌 숫자는 모두 3으로 나눌 수 있습니다. 따라서 3은 조건에 해당하는 양의 정수입니다. 하지만, 철수가 가진 카드들에 적힌 숫자들은 모두 7로 나눌 수 있고, 영희가 가진 카드들에 적힌 숫자는 모두 7로 나눌 수 없습니다. 따라서 최대값인 7을 return 합니다.
-"""
-
-from typing import List
-from math import gcd
+    return max(check_array(gcd_a, arrayB), check_array(gcd_b, arrayA))
 
 
-def solution(arrayA: List[int], arrayB: List[int]):
-    g1: int = arrayA[0]
-    g2: int = arrayB[0]
-    for i in range(1, len(arrayA)):
-        g1 = gcd(g1, arrayA[i])
-        g2 = gcd(g2, arrayB[i])
+arrayA = [10, 17]
+arrayB = [5, 20]
+print(solution(arrayA, arrayB))  # 0
 
-    flag2: bool = True
-    for a in arrayA:
-        if a >= g2 and a % g2 == 0:
-            flag2 = False
-            break
+arrayA = [10, 20]
+arrayB = [5, 17]
+print(solution(arrayA, arrayB))  # 10
 
-    flag1: bool = True
-    for b in arrayB:
-        if b >= g1 and b % g1 == 0:
-            flag1 = False
-            break
-
-    if flag1 and flag2:
-        return max(g1, g2)
-    if flag1:
-        return g1
-    if flag2:
-        return g2
-    return 0
+arrayA = [14, 35, 119]
+arrayB = [18, 30, 102]
+print(solution(arrayA, arrayB))  # 7
