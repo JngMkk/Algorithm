@@ -1,0 +1,40 @@
+WITH PYTHON AS (
+    SELECT
+        CODE
+    FROM
+        SKILLCODES
+    WHERE
+        NAME = 'Python'
+),
+
+CSHARP AS (
+    SELECT
+        CODE
+    FROM
+        SKILLCODES
+    WHERE
+        NAME = 'C#'
+),
+
+FRONT AS (
+    SELECT
+        BIT_OR(CODE)
+    FROM
+        SKILLCODES
+    WHERE
+        CATEGORY = 'Front End'
+)
+
+SELECT
+    CASE
+        WHEN (SKILL_CODE & (SELECT * FROM FRONT)) > 0 AND (SKILL_CODE & (SELECT * FROM PYTHON)) > 0 THEN 'A'
+        WHEN (SKILL_CODE & (SELECT * FROM CSHARP)) > 0 THEN 'B'
+        WHEN (SKILL_CODE & (SELECT * FROM FRONT)) > 0 THEN 'C'
+        ELSE NULL
+    END AS GRADE,
+    ID,
+    EMAIL
+FROM DEVELOPERS
+HAVING GRADE IS NOT NULL
+ORDER BY GRADE, ID
+;
